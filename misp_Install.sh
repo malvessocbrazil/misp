@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 # install_misp_final.sh
 # Script para criar um usuário de gerenciamento e instalar o MISP da forma correta.
 # Autor: Matheus Alves
@@ -25,7 +25,7 @@ read -s -p "Informe a senha para o usuário $USERNAME: " PASSWORD
 echo
 
 if id "$USERNAME" &>/dev/null; then
-  echo "⚠  Usuário $USERNAME já existe, pulando criação..."
+  echo "Usuário $USERNAME já existe, pulando criação..."
 else
   echo " Criando usuário $USERNAME..."
   adduser --quiet --disabled-password --gecos "" "$USERNAME"
@@ -49,7 +49,7 @@ apt-get update -y && apt-get upgrade -y
 
 # --- 4. DOWNLOAD E EXECUÇÃO DO INSTALADOR (Como root) ---
 echo "==============================================="
-echo "  Baixando instalador do MISP..."
+echo " Baixando instalador do MISP..."
 echo "==============================================="
 
 wget -O /tmp/INSTALL.sh "$MISP_INSTALL_URL"
@@ -70,3 +70,4 @@ bash /tmp/INSTALL.sh -c
 echo "==============================================="
 echo " Instalação do MISP concluída com sucesso!"
 echo "==============================================="
+
