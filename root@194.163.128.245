@@ -5,7 +5,7 @@
 # Autor : Matheus Alves 
 set -euo pipefail
 
-MISP_INSTALL_URL="https://raw.githubusercontent.com/MISP/MISP/refs/heads/2.5/INSTALL/INSTALL.ubuntu2404.sh"
+MISP_INSTALL_URL="https://raw.githubusercontent.com/MISP/MISP/2.5/INSTALL/INSTALL.sh"
 TMP_INSTALLER="/tmp/INSTALL.sh"
 
 require_root() {
