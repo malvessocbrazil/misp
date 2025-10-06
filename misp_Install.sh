@@ -3,7 +3,6 @@
 # Script para criar um usuário de gerenciamento e instalar o MISP da forma correta.
 # Autor: Matheus Alves
 
-
 set -euo pipefail
 
 MISP_INSTALL_URL="https://raw.githubusercontent.com/MISP/MISP/refs/heads/2.5/INSTALL/INSTALL.ubuntu2404.sh"
