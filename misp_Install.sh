@@ -2,7 +2,6 @@
 # install_misp_final.sh
 # Script para criar um usuário de gerenciamento e instalar o MISP da forma correta.
 # Autor: Matheus Alves
-# Versão Corrigida por Gemini
 
 set -euo pipefail
 
