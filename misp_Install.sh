@@ -1,6 +1,5 @@
-!/bin/bash
-# install_misp_final.sh
-# Script para criar um usuário de gerenciamento e instalar o MISP da forma correta.
+#!/bin/bash
+# Script para criar um usuário de gerenciamento, instalar o MISP 
 # Autor: Matheus Alves
 
 set -euo pipefail
@@ -8,13 +7,12 @@ set -euo pipefail
 MISP_INSTALL_URL="https://raw.githubusercontent.com/MISP/MISP/refs/heads/2.5/INSTALL/INSTALL.ubuntu2404.sh"
 
 # --- 1. VERIFICAÇÃO DE ROOT ---
-# Garante que o script inteiro seja executado com privilégios de root.
 if [ "$EUID" -ne 0 ]; then
-  echo " Este script precisa ser executado como root. Use: sudo ./install_misp_final.sh"
+  echo " Este script precisa ser executado como root. Use: sudo ./misp_install_v2.sh"
   exit 1
 fi
 
-# --- 2. CRIAÇÃO DO USUÁRIO (Opcional, mas mantido conforme solicitado) ---
+# --- 2. CRIAÇÃO DO USUÁRIO DE GERENCIAMENTO ---
 echo "==============================================="
 echo " Criando usuário de gerenciamento"
 echo "==============================================="
@@ -33,12 +31,31 @@ else
   echo " Usuário $USERNAME criado com privilégios sudo."
 fi
 
-# --- 3. PREPARAÇÃO DO SISTEMA (Como root) ---
+# --- 3. CONFIGURAÇÃO DO ENDEREÇO DE ACESSO (IP/FQDN) ---
+echo "==============================================="
+echo " Configurando o endereço de acesso do MISP"
+echo "==============================================="
+echo "Para evitar o redirecionamento para 'misp.local',"
+echo "informe o endereço IP ou o nome de domínio (FQDN)"
+echo "que você usará para acessar o MISP."
+echo "Exemplo: 192.168.15.9 ou misp.suaempresa.com"
+echo
+
+# Loop para garantir que a entrada não seja vazia
+while true; do
+    read -p "Informe o IP ou FQDN para o MISP: " MISP_HOSTNAME
+    if [ -n "$MISP_HOSTNAME" ]; then
+        break
+    else
+        echo "O endereço não pode ser vazio. Por favor, tente novamente."
+    fi
+done
+
+# --- 4. PREPARAÇÃO DO SISTEMA ---
 echo "==============================================="
 echo " Atualizando o sistema..."
 echo "==============================================="
 
-# Aguarda liberação do lock do apt
 while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do
   echo " Aguardando outro processo de pacote terminar..."
   sleep 5
@@ -46,7 +63,7 @@ done
 
 apt-get update -y && apt-get upgrade -y
 
-# --- 4. DOWNLOAD E EXECUÇÃO DO INSTALADOR (Como root) ---
+# --- 5. DOWNLOAD E EXECUÇÃO DO INSTALADOR ---
 echo "==============================================="
 echo " Baixando instalador do MISP..."
 echo "==============================================="
@@ -57,16 +74,26 @@ echo " Instalador baixado em /tmp/INSTALL.sh"
 
 echo "==============================================="
 echo " Executando instalador do MISP como ROOT..."
-echo "   (Esta é a maneira correta)"
+echo "   (O script pode pedir sua interação)"
 echo "==============================================="
 
-# A MUDANÇA CRUCIAL:
-# Executamos o instalador diretamente. Como nosso script já está rodando como root,
-# o INSTALL.sh herda esses privilégios e poderá criar logs em /var/log/ e
-# instalar tudo sem erros de permissão.
-bash /tmp/INSTALL.sh -c
+# Executa o instalador oficial de forma interativa (padrão)
+bash /tmp/INSTALL.sh
 
+# --- 6. CORREÇÃO DO REDIRECIONAMENTO (BASEURL) ---
 echo "==============================================="
-echo " Instalação do MISP concluída com sucesso!"
+echo " Corrigindo o redirecionamento (baseurl)..."
 echo "==============================================="
+echo "Configurando o acesso para: https://$MISP_HOSTNAME"
 
+# Define a URL base usando o comando cake do MISP
+# Isso deve ser executado como o usuário do servidor web (www-data)
+sudo -u www-data /var/www/MISP/app/Console/cake Baseurl "https://$MISP_HOSTNAME"
+
+echo "URL base configurada com sucesso!"
+
+# --- 7. FINALIZAÇÃO ---
+echo "==============================================="
+echo " Instalação e configuração do MISP concluídas!"
+echo " Acesse sua instância em: https://$MISP_HOSTNAME"
+echo "==============================================="
