@@ -1,35 +1,51 @@
 Automação de Instalação do MISP para Ubuntu Server
-Este repositório contém um script shell projetado para automatizar a instalação da plataforma de inteligência de ameaças (Threat Intelligence) MISP em um servidor Ubuntu.
 
-O principal objetivo deste script é simplificar o processo de setup, incluindo a criação de um usuário de gerenciamento e a correção automática do problema comum de redirecionamento para https://misp.local que ocorre após a instalação padrão.
+Este repositório contém scripts shell projetados para automatizar a instalação da plataforma de inteligência de ameaças (Threat Intelligence) MISP em servidores Ubuntu.
 
-Pré-requisitos
+O principal objetivo desses scripts é simplificar o processo de setup, incluindo a criação de um usuário de gerenciamento e a correção automática do problema comum de redirecionamento para https://misp.local que ocorre após a instalação padrão.
 
-Antes de executar o script, certifique-se de que seu ambiente atende aos seguintes requisitos:
+📦 Versões Disponíveis
 
-Sistema Operacional: Ubuntu Server 24.04 LTS.
+MISP 2.5 — Compatível com Ubuntu Server 24.04 LTS
 
-Versão do MISP: O script está configurado para instalar a versão 2.5 do MISP.
+MISP 2.4 — Compatível com Ubuntu Server 22.04 LTS
 
-Acesso: Acesso root ou um usuário com privilégios sudo.
+⚠️ Observação:
+O script da versão 2.4 não deve ser executado como usuário root.
+Utilize um usuário com privilégios sudo para garantir que a instalação ocorra corretamente.
 
-Conectividade: Acesso à internet para baixar os pacotes necessários e o script de instalação do MISP.
+✅ Pré-requisitos
 
-======================================================================================================================================================================================
+Antes de executar qualquer script, certifique-se de que seu ambiente atende aos seguintes requisitos:
 
-MISP Installation Automation for Ubuntu Server
-This repository contains a shell script designed to automate the installation of the MISP Threat Intelligence platform on an Ubuntu server.
+Sistema Operacional: Ubuntu Server 22.04 LTS ou 24.04 LTS
 
-The main goal of this script is to simplify the setup process, including the creation of a management user and the automatic fix for the common redirection issue to https://misp.local that occurs after a standard installation.
+Acesso: Acesso root ou usuário com privilégios sudo
 
-Prerequisites
+Conectividade: Acesso à internet para baixar pacotes e dependências necessárias
 
-Before running the script, ensure that your environment meets the following requirements:
+🌍 MISP Installation Automation for Ubuntu Server
 
-Operating System: Ubuntu Server 24.04 LTS.
+This repository contains shell scripts designed to automate the installation of the MISP Threat Intelligence platform on Ubuntu servers.
 
-MISP Version: The script is configured to install MISP version 2.5.
+The main goal of these scripts is to simplify the setup process, including the creation of a management user and the automatic fix for the common redirection issue to https://misp.local that occurs after a standard installation.
 
-Access: Root access or a user with sudo privileges.
+📦 Available Versions
 
-Connectivity: Internet access to download the necessary packages and the MISP installation script.
+MISP 2.5 — Compatible with Ubuntu Server 24.04 LTS
+
+MISP 2.4 — Compatible with Ubuntu Server 22.04 LTS
+
+⚠️ Note:
+The 2.4 script must not be executed as the root user.
+Use a user with sudo privileges instead.
+
+✅ Prerequisites
+
+Before running any script, ensure your environment meets the following requirements:
+
+Operating System: Ubuntu Server 22.04 LTS or 24.04 LTS
+
+Access: Root or sudo-enabled user
+
+Connectivity: Internet access to download required packages and dependencies
