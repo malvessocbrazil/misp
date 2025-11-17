@@ -1,3 +1,6 @@
+<img width="1870" height="624" alt="image" src="https://github.com/user-attachments/assets/5eedaea4-319b-46fb-bb5b-71e10a43b44a" />
+
+
 Automação de Instalação do MISP para Ubuntu Server
 
 Este repositório contém scripts shell projetados para automatizar a instalação da plataforma de inteligência de ameaças (Threat Intelligence) MISP em servidores Ubuntu.
