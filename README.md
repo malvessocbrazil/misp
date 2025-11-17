@@ -1,4 +1,4 @@
-<img width="1870" height="624" alt="image" src="https://github.com/user-attachments/assets/5eedaea4-319b-46fb-bb5b-71e10a43b44a" />
+<img width="1128" height="191" alt="image" src="https://github.com/user-attachments/assets/805950c7-9669-4041-89e0-33c1942301d6" />
 
 
 Automação de Instalação do MISP para Ubuntu Server
